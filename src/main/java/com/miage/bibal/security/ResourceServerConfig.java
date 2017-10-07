@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 /**
  *
  * @author alex
-
+*/
 @Configuration
 public class ResourceServerConfig {
     @Configuration
@@ -24,9 +24,8 @@ public class ResourceServerConfig {
                     .authenticationEntryPoint(myEntryPoint)
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/user").authenticated()
-                    .antMatchers("/oeuvre").authenticated();
+                    .antMatchers("/user").permitAll()
+                    .antMatchers("/oeuvre").permitAll();
         }
     }
 }
-*/

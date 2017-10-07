@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author alex
- 
+ */
 @Component
 public class CustomAuthenticationEntryPoint  implements AuthenticationEntryPoint {
     @Override
@@ -21,4 +21,3 @@ public class CustomAuthenticationEntryPoint  implements AuthenticationEntryPoint
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Accès rejeté");
     }
 }
-*/
