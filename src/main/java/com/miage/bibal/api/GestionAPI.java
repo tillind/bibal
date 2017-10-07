@@ -26,6 +26,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author alex
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value="/gestion",produces=MediaType.APPLICATION_JSON_VALUE)
 public class GestionAPI {
     public OeuvreRessource or;
@@ -84,7 +86,7 @@ public class GestionAPI {
     }
     
     @DeleteMapping(value = "/reservations/{resaId}")
-    public ResponseEntity<?> deleteOeuvre(@PathVariable("resaId") String resaId ){
+    public ResponseEntity<?> deleteReservation(@PathVariable("resaId") String resaId ){
         Reservation reservation = rr.findOne(resaId);
         rr.delete(resaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
