@@ -7,6 +7,8 @@ package com.miage.bibal.api;
 
 import com.miage.bibal.entity.Auteur;
 import com.miage.bibal.entity.Exemplaire;
+import com.miage.bibal.entity.Livre;
+import com.miage.bibal.entity.Magazine;
 import com.miage.bibal.entity.Oeuvre;
 import com.miage.bibal.entity.Usager;
 import com.miage.bibal.ressource.AuteurRessource;
@@ -113,6 +115,26 @@ public class OeuvreManagement {
         responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
     }
+     //POST
+    @PostMapping(value="/magazine/")
+    public ResponseEntity<?> saveMagazine(@RequestBody Magazine oeuvre){
+        oeuvre.setID(UUID.randomUUID().toString());
+        Magazine saved = mr.save(oeuvre);
+        HttpHeaders responseHeaders= new HttpHeaders();
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
+    }
+    
+      //POST
+    @PostMapping(value="/livre/")
+    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre){
+        oeuvre.setID(UUID.randomUUID().toString());
+        Livre saved = lr.save(oeuvre);
+        HttpHeaders responseHeaders= new HttpHeaders();
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
+    }
+    
     //POST
     @PostMapping("/auteur")
     public ResponseEntity<?> saveAuteur(@RequestBody Auteur auteur){
