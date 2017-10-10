@@ -3,8 +3,11 @@ package com.miage.bibal.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
@@ -21,8 +24,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class Auteur implements Serializable{
 
-    @OneToMany(mappedBy = "auteur")
-    private List<Livre> livres;
+   @ElementCollection
+   @CollectionTable(name="livre", joinColumns=@JoinColumn(name="ID"))
+    private List<String> livres;
     @Id
     private String ID;
     private String nom;
