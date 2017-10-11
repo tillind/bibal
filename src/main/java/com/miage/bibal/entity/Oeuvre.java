@@ -26,14 +26,15 @@ import lombok.NoArgsConstructor;
 public abstract class Oeuvre implements Serializable{
 
     @OneToMany(mappedBy = "oeuvre")
-    private List<Reservation> reservations;
+    protected List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "oeuvre")
-    private Set<Exemplaire> exemplaires;
+    
+    @OneToMany
+    protected Set<Exemplaire> exemplaires;
     @Id
-    private String ID;
-    private String nom;
-    private String synopsis;
+    protected String ID;
+    protected String nom;
+    protected String synopsis;
     
     
 }

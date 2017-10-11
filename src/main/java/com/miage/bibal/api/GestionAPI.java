@@ -118,7 +118,6 @@ public class GestionAPI {
         
         Emprunt tmp = emr.save(emprunt);
         ur.findOne(emprunt.getUsager().getID()).getEmprunts().add(emprunt.getID());
-        er.findOne(emprunt.getExemplaire().getId()).getEmprunts().add(emprunt.getID());
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(GestionAPI.class).slash(tmp.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);   

@@ -153,7 +153,6 @@ public class OeuvreManagement {
         Oeuvre oeuvre = or.findOne(id);
         oeuvre.getExemplaires().add(exemplaire);
         exemplaire.setId(UUID.randomUUID().toString());
-        exemplaire.setOeuvre(oeuvre);
         Exemplaire saved = er.save(exemplaire);
         Oeuvre savedo = or.save(oeuvre);
         HttpHeaders responseHeaders= new HttpHeaders();
