@@ -113,11 +113,8 @@ public class GestionAPI {
     @PostMapping(value = "/emprunt")
     public ResponseEntity<?> createEmprunt(@RequestBody Emprunt emprunt){
         emprunt.setID(UUID.randomUUID().toString());
-        
         emprunt.setEtat(E_Etat_Emprunt.EN_COURS);
-        
         Emprunt tmp = emr.save(emprunt);
-        ur.findOne(emprunt.getUsager().getID()).getEmprunts().add(emprunt.getID());
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(GestionAPI.class).slash(tmp.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);   

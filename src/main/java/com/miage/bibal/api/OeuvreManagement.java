@@ -129,9 +129,8 @@ public class OeuvreManagement {
     @PostMapping(value="/livre/")
     public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre){
         oeuvre.setID(UUID.randomUUID().toString());
-        
-        System.out.println(oeuvre.getAuteur().getID());
-        Livre saved = lr.save(oeuvre);
+        Livre tmp = (Livre) oeuvre; 
+        Livre saved = lr.save(tmp);
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);

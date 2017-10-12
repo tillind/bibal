@@ -25,9 +25,6 @@ import lombok.NoArgsConstructor;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Oeuvre implements Serializable{
 
-    @OneToMany(mappedBy = "oeuvre")
-    protected List<Reservation> reservations;
-
     
     @OneToMany
     protected Set<Exemplaire> exemplaires;
