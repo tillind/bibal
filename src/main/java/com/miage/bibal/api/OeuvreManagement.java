@@ -126,9 +126,12 @@ public class OeuvreManagement {
     }
     
       //POST
-    @PostMapping(value="/livre/")
-    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre){
+    @PostMapping(value="/livre/{idAuteur}")
+    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre,@PathVariable("oeuvreId") String idAuteur){
+        Auteur auteur = ar.findOne(idAuteur);
+        
         oeuvre.setID(UUID.randomUUID().toString());
+        oeuvre.setAuteur(auteur);
         Livre tmp = (Livre) oeuvre; 
         Livre saved = lr.save(tmp);
         HttpHeaders responseHeaders= new HttpHeaders();

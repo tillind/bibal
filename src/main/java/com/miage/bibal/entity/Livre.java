@@ -18,5 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @PrimaryKeyJoinColumn(name = "ID")
 public class Livre extends Oeuvre implements Serializable{
-    private String auteur;    
+    @ManyToOne
+    private Auteur auteur;
+    
 }
