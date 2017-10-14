@@ -55,13 +55,13 @@ public class OeuvreManagement {
     @GetMapping
     public ResponseEntity<?> getAllOeuvre(){
         Iterable<Oeuvre> oeuvreCollection = or.findAll();
-        return new ResponseEntity<>(EntityToRessource.oeuvreToRessource(oeuvreCollection),HttpStatus.OK);
+        return new ResponseEntity<>(oeuvreCollection,HttpStatus.OK);
     }
     
     @GetMapping(value="/{oeuvreId}")
     public ResponseEntity<?> getOeuvre(@PathVariable("oeuvreId") String id){
         return Optional.ofNullable(or.findOne(id))
-                .map(u -> new ResponseEntity<>(EntityToRessource.oeuvreToRessource(u,true),HttpStatus.OK))
+                .map(u -> new ResponseEntity<>(u,HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
