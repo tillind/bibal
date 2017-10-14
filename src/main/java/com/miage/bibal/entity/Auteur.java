@@ -24,11 +24,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Auteur implements Serializable{
 
-   @ElementCollection
-   @CollectionTable(name="livre", joinColumns=@JoinColumn(name="ID"))
-    private List<String> livres;
     @Id
-    private String ID;
+    private String idAuteur;
     private String nom;
     private String prenom;
     @Temporal(javax.persistence.TemporalType.DATE)

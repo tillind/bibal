@@ -31,7 +31,7 @@ public class EntityToRessource {
         return new Resources<>(usagerRessources,selfLink);
     }
     public static Resource<Oeuvre> oeuvreToRessource (Oeuvre oeuvre, Boolean collection){
-        Link selfLink = linkTo(UserManagementAPI.class).slash(oeuvre.getID()).withSelfRel();
+        Link selfLink = linkTo(UserManagementAPI.class).slash(oeuvre.getIdOeuvre()).withSelfRel();
         if(collection){
             Link collectionLink = linkTo(methodOn(OeuvreManagement.class).getAllOeuvre()).withRel("collection");
             return  new Resource<>(oeuvre, selfLink,collectionLink);
@@ -48,7 +48,7 @@ public class EntityToRessource {
         return new Resources<>(oeuvreRessources,selfLink);
     }
     public static Resource<Auteur> auteurToRessource (Auteur auteur, Boolean collection){
-        Link selfLink = linkTo(UserManagementAPI.class).slash(auteur.getID()).withSelfRel();
+        Link selfLink = linkTo(UserManagementAPI.class).slash(auteur.getIdAuteur()).withSelfRel();
         if(collection){
             Link collectionLink = linkTo(methodOn(UserManagementAPI.class).getAllUsager()).withRel("collection");
             return  new Resource<>(auteur, selfLink,collectionLink);

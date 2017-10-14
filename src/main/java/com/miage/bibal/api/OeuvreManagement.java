@@ -10,25 +10,16 @@ import com.miage.bibal.entity.Exemplaire;
 import com.miage.bibal.entity.Livre;
 import com.miage.bibal.entity.Magazine;
 import com.miage.bibal.entity.Oeuvre;
-import com.miage.bibal.entity.Usager;
 import com.miage.bibal.ressource.AuteurRessource;
 import com.miage.bibal.ressource.EntityToRessource;
 import com.miage.bibal.ressource.ExemplaireRessource;
 import com.miage.bibal.ressource.LivreRessource;
 import com.miage.bibal.ressource.MagazineRessource;
 import com.miage.bibal.ressource.OeuvreRessource;
-import com.miage.bibal.ressource.UsagerRessource;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -109,43 +100,46 @@ public class OeuvreManagement {
     //POST
     @PostMapping
     public ResponseEntity<?> saveOeuvre(@RequestBody Oeuvre oeuvre){
-        oeuvre.setID(UUID.randomUUID().toString());
+        oeuvre.setIdOeuvre(UUID.randomUUID().toString());
         Oeuvre saved = or.save(oeuvre);
         HttpHeaders responseHeaders= new HttpHeaders();
-        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getIdOeuvre()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
     }
      //POST
     @PostMapping(value="/magazine/")
     public ResponseEntity<?> saveMagazine(@RequestBody Magazine oeuvre){
-        oeuvre.setID(UUID.randomUUID().toString());
+        oeuvre.setIdOeuvre(UUID.randomUUID().toString());
         Magazine saved = mr.save(oeuvre);
         HttpHeaders responseHeaders= new HttpHeaders();
-        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getIdOeuvre()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
     }
     
       //POST
     @PostMapping(value="/livre/{idAuteur}")
-    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre,@PathVariable("oeuvreId") String idAuteur){
-        Auteur auteur = ar.findOne(idAuteur);
+    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre,@PathVariable("idAuteur") String idAuteur){
         
-        oeuvre.setID(UUID.randomUUID().toString());
-        oeuvre.setAuteur(auteur);
-        Livre tmp = (Livre) oeuvre; 
-        Livre saved = lr.save(tmp);
+        System.out.println("com.miage.bibal.api.OeuvreManagement.saveLivre()" + idAuteur);
+        Auteur auteur = ar.findOne(idAuteur);
+        System.out.println(auteur.getNom()+"  "+auteur.getPrenom());
+        oeuvre.setIdOeuvre(UUID.randomUUID().toString());
+        
+        oeuvre.setAuteur(null);
+  
+        Livre saved = lr.save(oeuvre);
         HttpHeaders responseHeaders= new HttpHeaders();
-        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getIdOeuvre()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
     }
     
     //POST
     @PostMapping("/auteur")
     public ResponseEntity<?> saveAuteur(@RequestBody Auteur auteur){
-        auteur.setID(UUID.randomUUID().toString());
+        auteur.setIdAuteur(UUID.randomUUID().toString());
         Auteur saved = ar.save(auteur);
         HttpHeaders responseHeaders= new HttpHeaders();
-        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getID()).toUri());
+        responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getIdAuteur()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);
     }
     //POST

@@ -29,7 +29,7 @@ public abstract class Oeuvre implements Serializable{
     @OneToMany
     protected Set<Exemplaire> exemplaires;
     @Id
-    protected String ID;
+    protected String idOeuvre;
     protected String nom;
     protected String synopsis;
     
