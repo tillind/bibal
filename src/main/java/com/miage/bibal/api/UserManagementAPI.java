@@ -89,8 +89,8 @@ public class UserManagementAPI  {
     }
     
     //put
-    @PutMapping
-    public ResponseEntity<?> updateIntervenant(@RequestBody Usager intervenant,@PathVariable("intervenantId") String intervenantId ){
+    @PutMapping(value="/{usagerId}")
+    public ResponseEntity<?> updateIntervenant(@RequestBody Usager intervenant,@PathVariable("usagerId") String intervenantId ){
         
         Optional<Usager> body= Optional.ofNullable(intervenant);
         

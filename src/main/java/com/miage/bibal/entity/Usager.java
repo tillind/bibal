@@ -1,15 +1,9 @@
 package com.miage.bibal.entity;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

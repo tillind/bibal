@@ -24,10 +24,8 @@ import lombok.NoArgsConstructor;
 public class Emprunt implements Serializable {
     @Id
     private String ID;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateDebut;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateFin;
+    private String dateDebut;
+    private String dateFin;
     @ManyToOne
     private Usager usager;
 
@@ -36,7 +34,7 @@ public class Emprunt implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private E_Etat_Emprunt etat;
     
-    public Emprunt(Date dateDebut,Date dateFin,Usager usager,Exemplaire exemplaire, E_Etat_Emprunt etat){
+    public Emprunt(String dateDebut,String dateFin,Usager usager,Exemplaire exemplaire, E_Etat_Emprunt etat){
         this.ID = UUID.randomUUID().toString();
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;

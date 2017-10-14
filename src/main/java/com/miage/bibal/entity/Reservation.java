@@ -22,17 +22,15 @@ import lombok.NoArgsConstructor;
 public class Reservation implements Serializable{
     @Id
     private String ID;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateDebut;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateFin;
+    private String dateDebut;
+    private String dateFin;
     @ManyToOne
     private Usager usager;
     @ManyToOne
     private Oeuvre oeuvre;
     
     
-    public Reservation(Date dateDebut, Date dateFin, Usager usager, Oeuvre oeuvre){
+    public Reservation(String dateDebut, String dateFin, Usager usager, Oeuvre oeuvre){
         this.ID = UUID.randomUUID().toString();
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;

@@ -28,7 +28,6 @@ public class Auteur implements Serializable{
     private String idAuteur;
     private String nom;
     private String prenom;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateDeNaiss;
+    private String dateDeNaiss;
     
 }

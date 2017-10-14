@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.miage.bibal.api;
 
 import com.miage.bibal.entity.Auteur;
@@ -118,16 +113,11 @@ public class OeuvreManagement {
     
       //POST
     @PostMapping(value="/livre/{idAuteur}")
-    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre,@PathVariable("idAuteur") String idAuteur){
-        
-        System.out.println("com.miage.bibal.api.OeuvreManagement.saveLivre()" + idAuteur);
+    public ResponseEntity<?> saveLivre(@RequestBody Livre oeuvre,@PathVariable("idAuteur") String idAuteur){        
         Auteur auteur = ar.findOne(idAuteur);
-        System.out.println(auteur.getNom()+"  "+auteur.getPrenom());
         oeuvre.setIdOeuvre(UUID.randomUUID().toString());
-        
         oeuvre.setAuteur(null);
-  
-        Livre saved = lr.save(oeuvre);
+        Livre saved = lr.saveAndFlush(oeuvre);
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(UserManagementAPI.class).slash(saved.getIdOeuvre()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);

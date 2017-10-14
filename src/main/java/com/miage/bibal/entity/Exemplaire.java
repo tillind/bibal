@@ -25,14 +25,14 @@ import lombok.NoArgsConstructor;
 public class Exemplaire implements Serializable{
     @Id
     private String id;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateAchat;
+
+    private String dateAchat;
     @Enumerated(EnumType.ORDINAL)
     private E_Etat_Exemplaire etat;
    
   
     
-    public  Exemplaire(Date dateAchat){
+    public  Exemplaire(String dateAchat){
         this.id = UUID.randomUUID().toString();
         this.dateAchat = dateAchat;
         this.etat = E_Etat_Exemplaire.NEUF;

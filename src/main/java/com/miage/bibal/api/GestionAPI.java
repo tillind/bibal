@@ -74,12 +74,12 @@ public class GestionAPI {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    @PostMapping(value = "/reservations")
-    public ResponseEntity<?> createResa(@RequestBody Reservation resa,@PathVariable("idOeuvre") String idOeuvre , @PathVariable("idUsager") String idUsager){
+    @PostMapping(value = "/reservations/{idOeuvre}/{idUsager}")
+    public ResponseEntity<?> createResa(@RequestBody Reservation resa,@PathVariable("idOeuvre") String idOeuvre,@PathVariable("idUsager") String idUsager ){
         resa.setID(UUID.randomUUID().toString());
         resa.setOeuvre(or.findOne(idOeuvre));
         resa.setUsager(ur.findOne(idUsager));
-        Reservation tmp = rr.save(resa);
+        Reservation tmp = rr.saveAndFlush(resa);
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(GestionAPI.class).slash(tmp.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);   
@@ -110,11 +110,13 @@ public class GestionAPI {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    @PostMapping(value = "/emprunt")
-    public ResponseEntity<?> createEmprunt(@RequestBody Emprunt emprunt){
+    @PostMapping(value = "/emprunt/{exemplaireId}/{idUsager}")
+    public ResponseEntity<?> createEmprunt(@RequestBody Emprunt emprunt,@PathVariable("exemplaireId") String idExemplaire,@PathVariable("idUsager") String idUsager){
         emprunt.setID(UUID.randomUUID().toString());
+        emprunt.setExemplaire(er.findOne(idExemplaire));
+        emprunt.setUsager(ur.findOne(idUsager));
         emprunt.setEtat(E_Etat_Emprunt.EN_COURS);
-        Emprunt tmp = emr.save(emprunt);
+        Emprunt tmp = emr.saveAndFlush(emprunt);
         HttpHeaders responseHeaders= new HttpHeaders();
         responseHeaders.setLocation(linkTo(GestionAPI.class).slash(tmp.getID()).toUri());
         return new ResponseEntity<>(null,responseHeaders,HttpStatus.CREATED);   
